@@ -13,7 +13,7 @@ BIOS在启动过程中将当前POST内容发送到80h地址，通过监听这个
 
 ###POST CODE
 
-POST CODE可以从0x00到0xff，但具体的含义由各OEM厂商不同而不同。服务器提供的port80命令可以同时提供POST CODE和对应的文字解释。
+POST CODE可以从0x00到0xff，但具体的含义由各OEM厂商不同而不同。服务器提供的port80命令可以同时提供POST CODE和对应的文字解释。另一方面一些BIOS如AMI会在启动时屏幕的右下角显示POST CODE。
 
 POST CODE同样可以通过低级的IO操作来设置。打开一个终端运行port80查看，另一个终端使用nekromant/pwrite的代码。 outb(指out byte)向0x80写入一个byte，即可改变port80命令看到的结果。
 

@@ -4,3 +4,38 @@ layout: default
 category: lessons
 tags: [intro, vagrant, tutorial, beginner]
 ---
+
+##Vagrant
+
+介绍使用Vagrant和VirtualBox快速创建和打包虚拟机环境。
+官网vagrantup.com下载软件和学习教程
+
+###命令
+
+	vagrant box add <name> <url>
+	vagrant box list
+	vagrant box remove <name>
+	vagrant box repackage <name> 
+	vagrant init [box-name] [box-url]
+	vagrant up [vm-name] [--[no-]provision] [-h]
+	vagrant destroy [vm-name]
+	vagrant suspend [vm-name]
+	vagrant reload [vm-name]
+	vagrant resume [vm-name]
+	vagrant halt [vm-name]
+	vagrant status [vm-name] 
+	vagrant package [vm-name] [--base name] [--output name.box][--include one,two,three] [--vagrantfile file]
+	vagrant provision [vm-name]
+	vagrant ssh [vm-name] [-c command] [-- extra ssh args]
+	vagrant ssh-config [vm-name] [--host name]
+
+###Vagrantfile
+
+和docker使用dockerfile类似，Vagrant使用Vagrantfile创建虚拟机。使用ruby语法。可以指定主机共享目录（vm挂载在/vagrant）
+
+创建Vagrantfile后:
+    
+    vagrant init 创建工程
+    vagrant up   导入image开始配置
+    vagrant destroy 停止虚拟机
+    vagrant ssh  登陆虚拟环境
