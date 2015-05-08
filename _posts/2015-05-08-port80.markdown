@@ -21,8 +21,21 @@ POST CODE同样可以通过低级的IO操作来设置。打开一个终端运行
     #./pwrite 0x88
 
 为获取全部POST CODE，使用如下代码：
+
     #for i in {0..255}; do
     j = $(printf %x $i);
     ./pwrite $j;
     sleep 1;
     done
+
+###UEFI启动过程
+
+启动过程硬件初始化一般是CPU由近及远，CPU->内存->总线->IO，POST CODE一般是从小到大。为了解POST CODE中一些缩略语，简单介绍UEFI一些概念。
+
+首先目前我们所使用的服务器都是使用UEFI的，所谓的Legacy BIOS只是UEFI中的CSM兼容模块。
+
+    UEFI启动流程：
+    SEC: Security
+    PEI: Pre EFI
+    DXE: Driver Execution Environment
+    BDS: Boot Device Selection
