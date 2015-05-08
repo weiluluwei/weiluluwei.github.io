@@ -1,0 +1,28 @@
+---
+title: Port80
+layout: default
+category: lessons
+tags: [bios, tutorial, uefi]
+---
+
+##Port80
+
+服务器的bmc基本都提供port80的命令用来查看主机启动POST过程。这里的Port80区别于常见的http服务:80端口，指的是硬件的物理地址。
+
+BIOS在启动过程中将当前POST内容发送到80h地址，通过监听这个地址就可以获得当前的POST CODE。如果电脑在启动过程中HANG，POST CODE会停在那里不再发生变化，这就是一般的电脑卡或诊断卡的工作原理。
+
+###POST CODE
+
+POST CODE可以从0x00到0xff，但具体的含义由各OEM厂商不同而不同。服务器提供的port80命令可以同时提供POST CODE和对应的文字解释。
+
+POST CODE同样可以通过低级的IO操作来设置。打开一个终端运行port80查看，另一个终端使用nekromant/pwrite的代码。 outb(指out byte)向0x80写入一个byte，即可改变port80命令看到的结果。
+
+    #make
+    #./pwrite 0x88
+
+为获取全部POST CODE，使用如下代码：
+    #for i in {0..255}; do
+    j = $(printf %x $i);
+    ./pwrite $j;
+    sleep 1;
+    done

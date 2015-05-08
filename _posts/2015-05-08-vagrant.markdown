@@ -1,0 +1,6 @@
+---
+title: Vagrant tutorial
+layout: default
+category: lessons
+tags: [intro, vagrant, tutorial, beginner]
+---
